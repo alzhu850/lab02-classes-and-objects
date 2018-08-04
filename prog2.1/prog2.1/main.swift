@@ -13,7 +13,7 @@ var u: Fraction
 
 // Initialise the object
 u = Fraction(num: 2,den: 3)
-u.den = 0
+
 
 // Show the state of the object's internal variables
 print("u=\(u.description)")

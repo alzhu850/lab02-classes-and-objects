@@ -16,8 +16,8 @@ import Foundation
 class Fraction {
     //  Stored Properties
     
-    var num: Int;     // Numbertor
-    var den: Int;     // Denominator
+    private let num: Int;     // Numbertor
+    private let den: Int;     // Denominator
 
     // COMPUTED PROPERTIES
     
@@ -73,6 +73,35 @@ init (num: Int ,den: Int ) {
     // Check the denominator...
     
     assert(den != 0 , "Denominator cannot be zero")
+    
+    
+    
+    // Arguments are constants, redefine them
+    // as variables
+    var num = num;
+    var den = den;
+    
+    if(den < 0) {
+        // If the denominator is negative
+        // multiply the numerator and
+        // denominator by -1 - this
+        // ensures the denominator is
+        // always positive, and numerator
+        // carries the appropriate sign
+        num = -num
+        den = -den
+    }
+    
+    // Find greatest common denominator
+    for gcd in (1...den).reversed() {
+        if(num%gcd == 0 && den%gcd==0) {
+            // Common denominator found,
+            // divide numerator and denominator
+            num /= gcd
+            den /= gcd
+            break
+        }
+    }
     
     self.num = num
     self.den = den
@@ -241,6 +270,12 @@ init (num: Int ,den: Int ) {
     func divide(_ x: Int) -> Fraction {
         return Fraction(num: self.num, den: self.den*x)
     }
+    
+    /**
+     Reduce self by greater common denominator found.
+     */
+    
+   
     
     /**
      + Opreator between two Fraction
